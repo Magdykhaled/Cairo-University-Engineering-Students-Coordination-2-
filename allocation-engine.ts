@@ -10,7 +10,7 @@ export async function runAllocationProcess() {
     const assignmentMap = new Map<string, string[]>();
 
     // تجهيز خريطة لحساب الأماكن المتاحة والطلاب المقبولين في كل قسم
-    capacities.forEach((c) => {
+    capacities.forEach((c: any) => {
       capacityMap.set(c.deptCode, c.capacity);
       assignmentMap.set(c.deptCode, []);
     });
