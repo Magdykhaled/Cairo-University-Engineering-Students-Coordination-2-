@@ -2,7 +2,7 @@ import { prisma } from "./db";
 
 // دالة تشغيل خوارزمية التنسيق والتوزيع الذكي للطلاب
 export async function runAllocationProcess() {
-  return await prisma.$transaction(async (tx) => {
+  return await prisma.$transaction(async (tx: any) => {
     
     // 1. جلب الطاقة الاستيعابية الحالية لكل قسم من الأقسام الأربعة
     const capacities = await tx.departmentCapacity.findMany();
