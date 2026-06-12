@@ -1,6 +1,6 @@
 datasource db {
   provider = "postgresql"
-  url      =  env("postgresql://neondb_owner:npg_hAZbwYo23uLy@ep-round-thunder-at4zkamb.c-9.us-east-1.aws.neon.tech/neondb?sslmode=require")
+  url      = env("DATABASE_URL")
 }
 
 generator client {
@@ -13,45 +13,11 @@ enum Role {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String    @unique
-  passwordHash  String
-  role          Role      @default(USER)
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  logs          AuditLog[]
-}
-
-model Student {
-  id              String   @id @default(cuid())
-  fullName        String
-  gpa             Float
-  firstChoice     String
-  secondChoice    String
-  thirdChoice     String
-  fourthChoice    String
-  allocatedDept   String?
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-
-  @@index([gpa(sort: Desc)])
-}
-
-model DepartmentCapacity {
-  id          String   @id @default(cuid())
-  deptCode    String   @unique // e.g., "CMP", "MEC", "CIV", "EE"
-  nameEn      String
-  nameAr      String
-  capacity    Int      @default(0)
-  updatedAt   DateTime @updatedAt
-}
-
-model AuditLog {
-  id        String   @id @default(cuid())
-  userId    String
-  action    String
-  details   String
-  createdAt DateTime @default(now())
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id           String   @id @default(cuid())
+  name         String?
+  email        String   @unique
+  passwordHash String
+  role         Role     @default(USER)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }
