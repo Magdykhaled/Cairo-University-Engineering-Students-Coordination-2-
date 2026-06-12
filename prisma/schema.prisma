@@ -1,6 +1,6 @@
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      =  "postgresql://neondb_owner:npg_hAZbwYo23uLy@ep-round-thunder-at4zkamb.c-9.us-east-1.aws.neon.tech/neondb?sslmode=require"
 }
 
 generator client {
@@ -55,5 +55,3 @@ model AuditLog {
   createdAt DateTime @default(now())
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
-
-
